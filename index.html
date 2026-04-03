@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SatSet Premium - Price List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Poppins', 'sans-serif'] },
+                    colors: {
+                        brand: {
+                            dark: '#020617',
+                            card: '#1e293b',
+                            accent: '#38bdf8',
+                            whatsapp: '#25D366'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #020617;
+            color: #f8fafc;
+            background-image: radial-gradient(at 0% 100%, rgba(56, 189, 248, 0.1) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+        .app-card { transition: all 0.3s ease; }
+        .app-card:hover { transform: translateY(-5px); border-color: rgba(56, 189, 248, 0.4); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans">
+
+    <header class="pt-12 pb-8 px-4 text-center">
+        <h1 class="text-3xl md:text-5xl font-bold mb-3 tracking-tight">
+            <span class="text-white">SATSET</span>
+            <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400">PREMIUM</span>
+        </h1>
+        <div class="inline-block bg-red-500/20 border border-red-500 text-red-400 px-4 py-2 rounded-lg text-xs md:text-sm font-bold uppercase tracking-widest animate-pulse">
+            ⚠️ WAJIB TANYA STOK TERLEBIH DAHULU SEBELUM ORDER DAN TF
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-5xl mx-auto px-4 pb-20 w-full">
+        <div id="products-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            </div>
+    </main>
+
+    <footer class="text-center py-6 border-t border-slate-800 text-slate-500 text-xs mt-auto">
+        <p>&copy; 2026 SatSet Premium. Trusted & Fast Process.</p>
+    </footer>
+
+    <script>
+        const waNumber = "6281357709484"; 
+
+        const products = [
+            {
+                name: "CapCut",
+                icon: "fa-solid fa-video",
+                iconColor: "text-slate-200",
+                packages: [
+                    { name: "1 Bulan Private (Garansi 7 Hari)", price: "Rp 17.000" }
+                ]
+            },
+            {
+                name: "Canva",
+                icon: "fa-solid fa-palette",
+                iconColor: "text-blue-400",
+                packages: [
+                    { name: "Pro Member 1 Bulan", price: "Rp 5.000" },
+                    { name: "Pro Head 1 Bulan", price: "Rp 15.000" },
+                    { name: "Edu Member Lifetime", price: "Rp 12.000" }
+                ]
+            },
+            {
+                name: "YouTube Premium",
+                icon: "fa-brands fa-youtube",
+                iconColor: "text-red-600",
+                packages: [
+                    { name: "Jaspay (Murce)", price: "Rp 4.000" },
+                    { name: "Gsuite 1 Bulan", price: "Rp 16.000" }
+                ]
+            },
+            {
+                name: "Spotify Premium",
+                icon: "fa-brands fa-spotify",
+                iconColor: "text-green-500",
+                packages: [
+                    { name: "Famplan 1 Bulan (Awet) No Garansi", price: "Rp 22.000" }
+                ]
+            },
+            {
+                name: "Chat GPT",
+                icon: "fa-solid fa-robot",
+                iconColor: "text-emerald-400",
+                packages: [
+                    { name: "Member 1 Bulan", price: "Rp 19.000" }
+                ]
+            },
+            {
+                name: "Scribd",
+                icon: "fa-solid fa-book-open",
+                iconColor: "text-teal-400",
+                packages: [
+                    { name: "Private 1 Bulan", price: "Rp 10.000" }
+                ]
+            },
+            {
+                name: "Viu & Zoom",
+                icon: "fa-solid fa-desktop",
+                iconColor: "text-orange-400",
+                packages: [
+                    { name: "Viu Premium 1 Tahun", price: "Rp 38.000" },
+                    { name: "Zoom Private 14 Hari", price: "Rp 10.000" }
+                ]
+            }
+        ];
+
+        function orderItem(appName, packageName, price) {
+            const message = `Halo SatSet Premium, mau tanya stok:\n\n📱 *Aplikasi:* ${appName}\n📦 *Paket:* ${packageName}\n💰 *Harga:* ${price}\n\nReady?`;
+            window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        function renderProducts() {
+            const container = document.getElementById('products-container');
+            products.forEach(app => {
+                const card = document.createElement('div');
+                card.className = 'app-card bg-brand-card rounded-2xl border border-slate-700/50 overflow-hidden flex flex-col shadow-xl';
+                
+                let packagesHTML = '';
+                app.packages.forEach(pkg => {
+                    packagesHTML += `
+                        <div class="flex justify-between items-center bg-slate-900/40 p-3 rounded-xl border border-slate-700/30">
+                            <div class="flex flex-col">
+                                <span class="text-[13px] font-medium text-slate-200">${pkg.name}</span>
+                                <span class="text-xs font-bold text-emerald-400">${pkg.price}</span>
+                            </div>
+                            <button onclick="orderItem('${app.name}', '${pkg.name}', '${pkg.price}')" 
+                                class="bg-brand-whatsapp hover:bg-green-600 text-white px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all flex items-center gap-1">
+                                ORDER
+                            </button>
+                        </div>`;
+                });
+
+                card.innerHTML = `
+                    <div class="bg-slate-800/80 px-5 py-3 flex items-center gap-3 border-b border-slate-700/50">
+                        <i class="${app.icon} ${app.iconColor} text-lg"></i>
+                        <h2 class="text-sm font-bold text-white uppercase tracking-wider">${app.name}</h2>
+                    </div>
+                    <div class="p-4 flex flex-col gap-2">${packagesHTML}</div>
+                `;
+                container.appendChild(card);
+            });
+        }
+        document.addEventListener('DOMContentLoaded', renderProducts);
+    </script>
+</body>
+</html>
